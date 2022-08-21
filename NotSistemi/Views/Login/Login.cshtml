@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+<head>
+    <link href="~/Content/Login.css" rel="stylesheet" />
+    <title>Not Sistemi Login</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/assets/img/klimasan.png">
+</head>
+<body>
+    <div class="background-wrap">
+        <div class="background"></div>
+    </div>
+    @{ 
+        var username = "";
+        var userpassword = "";
+        if (Request.Cookies["username"] != null)
+        {
+            username = Request.Cookies["username"].Value;
+            userpassword = Request.Cookies["userpassword"].Value;
+        }
+    }
+    <form id="accesspanel" action="login" method="post">
+        <h1 id="litheader" style="color: #EB1616">NOT SİSTEMİ</h1>
+        <div class="inset">
+            <p>
+                <input type="text" name="USER_NAME" id="email" placeholder="Kullanıcı Adı" value=@username>
+            </p>
+            <p>
+                <input type="password" name="USER_PASSWORD" id="password" placeholder="Şifre" value=@userpassword>
+            </p>
+            <div style="text-align: center;">
+                <div class="checkboxouter">
+                    <input type="checkbox" name="REMEMBERME" id="check" onchange="calc()">
+                    <label class="checkbox"></label>
+                    <script>
+                        function calc() {
+                            if (document.getElementById('check').checked) {
+                                document.getElementById('check').value = true;
+                            } else {
+                                document.getElementById('check').value = false;
+                            }
+                        }
+                    </script>
+                </div>
+                <label for="remember">Beni Hatırla</label>
+            </div>
+            <input class="loginLoginValue" type="hidden" name="service" value="login" />
+        </div>
+        <p class="p-container">
+            <input type="submit" name="Login" id="go" style="background-color: #EB1616; color: #bbb " value="Giriş Yap">
+        </p>
+    </form>
+    <script>
+        $(document).ready(function() {
+
+    var state = false;
+
+    //$("input:text:visible:first").focus();
+
+    $('#accesspanel').on('submit', function(e) {
+
+        e.preventDefault();
+
+        state = !state;
+
+        if (state) {
+            document.getElementById("litheader").className = "poweron";
+            document.getElementById("go").className = "";
+            document.getElementById("go").value = "Initializing...";
+        }else{
+            document.getElementById("litheader").className = "";
+            document.getElementById("go").className = "denied";
+            document.getElementById("go").value = "Access Denied";
+        }
+
+    });
+
+});
+    </script>
+</body>
+
+
