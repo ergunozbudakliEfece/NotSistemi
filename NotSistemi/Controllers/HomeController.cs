@@ -86,7 +86,7 @@ namespace NotSistemi.Controllers
 
             Ticket tic = new Ticket();
             tic.TICKET_ID = ticket.TICKET_ID;
-            tic.USER_NAME = Request.Cookies["Name"].Value;
+            tic.USER_NAME = ticket.USER_NAME;
             tic.DATE = DateTime.Now.ToString("d");
             tic.ISSUE = ticket.ISSUE;
             tic.STATUS = ticket.STATUS;
